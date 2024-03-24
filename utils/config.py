@@ -1,0 +1,1 @@
+lidar_bag_path = '/home/warra/gitrep/omnigrid/data/bags/lidar_points-007/'
