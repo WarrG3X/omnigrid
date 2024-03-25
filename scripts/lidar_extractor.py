@@ -51,7 +51,7 @@ def save_pcd(file_name, points, fields=('x', 'y', 'z')):
         for point in points:
             f.write(" ".join(map(str, point)) + "\n")
 
-
+Ts = []
 with AnyReader([Path(bag_path)]) as reader:
     # topic and msgtype information is available on .connections list
     print("Connections:")
@@ -72,3 +72,8 @@ with AnyReader([Path(bag_path)]) as reader:
 
 
 print(f"Finished extracting in {time.time() - t0:.2f} seconds. Total {count} point clouds extracted.")
+
+duration = Ts[-1] - Ts[0]
+mins = duration // 60
+secs = duration % 60
+print(f"Duration: {mins} mins {secs} seconds")
