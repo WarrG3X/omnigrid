@@ -17,23 +17,48 @@ video_path = config.feed_path
 cap = cv2.VideoCapture(video_path)
 
 frame_count = 0
-t0 = time.time()
-if not cap.isOpened():
-    print("Error: Could not open video.")
-else:
-    print("Extracting frames...")
+if cap.isOpened():
     while True:
-        ret, frame = cap.read()
+        ret, _ = cap.read()
         if ret:
-            frame_filename = os.path.join(output_dir, f'frame_{frame_count}.jpg')
-            cv2.imwrite(frame_filename, frame)
             frame_count += 1
-
-            if frame_count % 100 == 0:
-                print(f"Extracted {frame_count} frames.")
         else:
             break
+    cap.release()
+else:
+    print("Error: Could not open video.")
+    sys.exit()
 
-cap.release()
+# Parameters for sampling
+lidar_samples = 2866 # Number of LIDAR samples
+subset = 155  # Number of frames to save
 
-print(f"Extraction completed in {time.time() - t0:.2f} seconds. {frame_count} frames were saved.")
+
+sampling_rate = max(frame_count // lidar_samples, 1)
+
+# Re-open the video file to save sampled frames
+cap = cv2.VideoCapture(video_path)
+saved_frames = 0
+current_frame = 0
+
+print(f"The video has {frame_count} frames. The LIDAR data has {lidar_samples} samples.")
+print(f"Sampling every {sampling_rate} frames.")
+print("Saving sampled frames...")
+
+if cap.isOpened():
+    while saved_frames < subset:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        if current_frame % sampling_rate == 0:
+            frame_filename = os.path.join(output_dir, f'frame_{saved_frames:04d}.png')
+            cv2.imwrite(frame_filename, frame)
+            saved_frames += 1
+        current_frame += 1
+    cap.release()
+else:
+    print("Error: Could not re-open video.")
+    sys.exit()
+
+print(f"Scaled {frame_count} frames to {lidar_samples} frames.")
+print(f"Saved first {saved_frames} sampled frames")
