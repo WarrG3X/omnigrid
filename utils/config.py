@@ -1,2 +1,7 @@
 lidar_bag_path = '/home/warra/gitrep/omnigrid/data/bags/lidar_points-007/'
-feed_path = '/home/warra/gitrep/omnigrid/data/feed/camera_1_lbl_2023-03-27-14-14-50-002.qt'
+feed_path0 = 'data/camera_0_ufl_2023-03-27-13-55-45-004.qt'
+feed_path1 = 'data/camera_1_lbl_2023-03-27-13-55-45-007.qt'
+feed_path2 = 'data/camera_2_lfm_2023-03-27-13-55-45-010.qt'
+feed_path3 = 'data/camera_3_lbr_2023-03-27-13-55-45-008.qt'
+feed_path4 = 'data/camera_4_ufr_2023-03-27-13-55-45-001.qt'
+feed_path5 = 'data/camera_5_ubm_2023-03-27-13-55-45-005.qt'

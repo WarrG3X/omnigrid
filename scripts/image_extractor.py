@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 import time
 
-output_dir = 'data/camera1/'
+output_dir = 'data/camera5/'
 parent_dir = str(Path(__file__).resolve().parent.parent)
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
@@ -12,7 +12,7 @@ if parent_dir not in sys.path:
 from utils import config
 
 # Path to .qt video file
-video_path = config.feed_path
+video_path = config.feed_path5
 
 cap = cv2.VideoCapture(video_path)
 
@@ -30,8 +30,8 @@ else:
     sys.exit()
 
 # Parameters for sampling
-lidar_samples = 2866 # Number of LIDAR samples
-subset = 155  # Number of frames to save
+lidar_samples = 7963 # Number of LIDAR samples
+subset = 7963  # Number of frames to save
 
 
 sampling_rate = max(frame_count // lidar_samples, 1)
