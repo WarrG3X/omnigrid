@@ -17,7 +17,7 @@ dataset = FisheyeDataset('data/', 'data/lidar/', transform=transform)
 
 
 count = 0
-for images, pcds in dataset:
+for images, depths, pcds in dataset:
     # Show image
     fig, axs = plt.subplots(2, 3, figsize=(15, 10),facecolor='black')
 
@@ -31,9 +31,10 @@ for images, pcds in dataset:
     plt.savefig(f"dataloader_{count}.png", bbox_inches='tight',pad_inches=0)
 
     # # Visualize point cloud
-    # pcd = o3d.geometry.PointCloud()
-    # pcd.points = o3d.utility.Vector3dVector(pcds)
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(pcds)
     # # o3d.visualization.draw_geometries([pcd])
+    o3d.io.write_point_cloud(f'pcd_{count}.pcd', pcd)
 
     if count == 2:
         break

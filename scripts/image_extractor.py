@@ -12,7 +12,7 @@ if parent_dir not in sys.path:
 from utils import config
 
 # Path to .qt video file
-video_path = config.feed_path5
+video_path = config.lp6_feed_path0
 
 cap = cv2.VideoCapture(video_path)
 
